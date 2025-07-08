@@ -12,9 +12,10 @@ class KostController extends Controller
         return view('kosts.index', compact('kosts'));
     }
 
-    public function show($id)
-    {
-        $kost = Kost::findOrFail($id);
-        return view('kosts.show', compact('kost'));
-    }
+  public function show(Kost $kost)
+{
+    return view('kosts.show', compact('kost'));
+}
+
+
 }
