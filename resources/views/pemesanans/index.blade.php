@@ -52,9 +52,10 @@
 </style>
 
 <section class="section" style="min-height: 100vh; padding: 1.5rem;">
-    {{-- Menghapus class Bulma 'has-background-dark' dari div.box untuk menghindari konflik --}}
-    <div class="box has-text-white" style="border-radius: 8px; padding: 2.5rem; margin-left: 1.5rem; margin-right: 1.5rem;">
-        <h1 class="title is-3 has-text-primary mb-5" style="color: #48c78e !important;">Pesan Kost: {{ $kost->nama_kost }}</h1>
+    {{-- Menghapus div.container dan has-text-centered agar konten menjadi full width --}}
+    {{-- Menambahkan margin horizontal pada box agar tidak terlalu menempel ke tepi layar --}}
+    <div class="box" style="border-radius: 8px; padding: 2.5rem; margin-left: 1.5rem; margin-right: 1.5rem;">
+        <h1 class="title is-3 has-text-primary mb-5" style="color: #48c78e !important; text-align: center;">Pesan Kost: {{ $kost->nama_kost }}</h1> {{-- Menambahkan text-align center --}}
 
         {{-- Pesan Sukses Bulma --}}
         @if(session('success'))
