@@ -6,14 +6,14 @@
         {{-- Mengubah has-background-white menjadi has-background-dark untuk latar belakang box --}}
         {{-- Menambahkan has-text-white untuk memastikan teks di dalam box terlihat --}}
         <div class="box has-background-dark has-text-white">
-            {{-- Tombol Kembali ke Halaman Utama --}}
-            <div class="mb-4">
+            <h1 class="title is-3 has-text-primary mb-5">Riwayat Pemesanan Kost</h1>
+
+            {{-- Tombol Kembali --}}
+            <div class="mb-5">
                 <a href="/" class="button is-link is-light">
                     ← Kembali ke Halaman Utama
                 </a>
             </div>
-
-            <h1 class="title is-3 has-text-primary mb-5">Riwayat Pemesanan Kost</h1>
 
             {{-- Pesan Sukses Bulma --}}
             @if(session('success'))
