@@ -22,23 +22,36 @@
         {{-- Grid Kolom untuk Daftar Kost --}}
         <div class="columns is-multiline">
             @foreach($kosts as $kost)
-                <div class="column is-one-third-desktop is-half-tablet is-full-mobile"> {{-- Responsive columns --}}
-                    <div class="box has-text-left"> {{-- Menggunakan Bulma 'box' untuk setiap kartu kost --}}
-                        @if($kost->gambar)
-                            <figure class="image is-4by3 mb-4"> {{-- Margin bawah untuk gambar --}}
-                                <img src="{{ asset('storage/kosts/' . $kost->gambar) }}" alt="Foto {{ $kost->nama_kost }}"> {{-- Menghapus class is-rounded --}}
-                            </figure>
-                        @else
-                            <figure class="image is-4by3 mb-4">
-                                <img src="https://via.placeholder.com/400x300?text=No+Image" alt="No Image Available"> {{-- Menghapus class is-rounded --}}
-                            </figure>
-                        @endif
+                <div class="column is-one-third-desktop is-half-tablet is-full-mobile">
+                    <div class="box has-text-left">
+                        {{-- Cek nama kost untuk menentukan gambar online --}}
+                        @php
+                            $imageUrl = null;
+                            switch(strtolower($kost->nama_kost)) {
+                                case 'pratama':
+                                    $imageUrl = 'https://binabangunbangsa.com/wp-content/uploads/2020/03/tips-Manajemen-Rumah-Kost-yang-Baik-dan-Benar-.jpg';
+                                    break;
+                                case 'babol':
+                                    $imageUrl = 'https://office.mitrarenov.com/assets/main/images/news/93cf29661239b41f5cc393e112ef7a39.jpg';
+                                    break;
+                                case 'griya mustika':
+                                    $imageUrl = 'https://papikost.com/images/property/478_968253603.jpg';
+                                    break;
+                                default:
+                                    $imageUrl = $kost->gambar ? asset('storage/kosts/' . $kost->gambar) : 'https://via.placeholder.com/400x300?text=No+Image';
+                                    break;
+                            }
+                        @endphp
 
-                        <h2 class="title is-5 mb-2">{{ $kost->nama_kost }}</h2> {{-- Judul kost --}}
-                        <p class="subtitle is-6 has-text-grey mb-2">{{ $kost->alamat }}</p> {{-- Alamat kost --}}
-                        <p class="is-size-5 has-text-success has-text-weight-bold mb-3">Rp {{ number_format($kost->harga_per_bulan, 0, ',', '.') }}</p> {{-- Harga kost --}}
+                        <figure class="image is-4by3 mb-4">
+                            <img src="{{ $imageUrl }}" alt="Foto {{ $kost->nama_kost }}">
+                        </figure>
 
-                        <a href="{{ route('kosts.show', $kost->id) }}" class="button is-link is-small is-fullwidth"> {{-- Tombol Lihat Detail --}}
+                        <h2 class="title is-5 mb-2">{{ $kost->nama_kost }}</h2>
+                        <p class="subtitle is-6 has-text-grey mb-2">{{ $kost->alamat }}</p>
+                        <p class="is-size-5 has-text-success has-text-weight-bold mb-3">Rp {{ number_format($kost->harga_per_bulan, 0, ',', '.') }}</p>
+
+                        <a href="{{ route('kosts.show', $kost->id) }}" class="button is-link is-small is-fullwidth">
                             Lihat Detail
                         </a>
                     </div>
