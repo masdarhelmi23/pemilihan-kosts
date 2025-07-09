@@ -95,8 +95,8 @@
                         <img src="{{ $imageUrl }}" alt="Foto {{ $kost->nama_kost }}" onerror="this.onerror=null;this.src='https://via.placeholder.com/400x300?text=Image+Load+Error';" style="border-radius: 4px;"> {{-- Menambahkan onerror untuk fallback jika gambar gagal dimuat dan border-radius --}}
                     </figure>
 
-                    <h2 class="title is-5 mb-2">{{ $kost->nama_kost }}</h2> {{-- Judul kost --}}
-                    {{-- Mengubah mb-2 menjadi mb-3 untuk memberikan sedikit lebih banyak ruang di bawah alamat --}}
+                    {{-- Mengubah mb-2 pada judul kost menjadi mb-3 untuk memberikan lebih banyak ruang di bawahnya --}}
+                    <h2 class="title is-5 mb-3">{{ $kost->nama_kost }}</h2> {{-- Judul kost --}}
                     <p class="subtitle is-6 has-text-grey mb-3">{{ $kost->alamat }}</p> {{-- Alamat kost --}}
                     <p class="is-size-5 has-text-success has-text-weight-bold mb-3">Rp {{ number_format($kost->harga_per_bulan, 0, ',', '.') }}</p> {{-- Harga kost --}}
 
