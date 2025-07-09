@@ -12,6 +12,9 @@
         color: #e2e8f0; /* Warna teks di dalam box */
         border-radius: 8px;
         padding: 1.5rem; /* Menyesuaikan padding untuk kartu */
+        display: flex; /* Menggunakan flexbox untuk tata letak konten di dalam box */
+        flex-direction: column; /* Mengatur item dalam kolom */
+        height: 100%; /* Memastikan box mengambil tinggi penuh kolom */
     }
     .title.has-text-link { /* Menyesuaikan warna judul 'Daftar Kost' */
         color: #3e8ed0 !important;
@@ -19,8 +22,11 @@
     .title.is-5 { /* Menyesuaikan warna judul kost di kartu */
         color: #e2e8f0 !important;
     }
-    .subtitle.is-6.has-text-grey { /* Menyesuaikan warna subtitle alamat di kartu */
+    .subtitle.is-6.has-text-grey {
         color: #a0aec0 !important;
+        word-wrap: break-word; /* Memastikan teks panjang pecah ke baris baru */
+        white-space: normal; /* Memastikan spasi normal dan memungkinkan wrapping */
+        flex-grow: 1; /* Memungkinkan elemen ini mengambil ruang yang tersedia */
     }
     .button.is-primary { /* Menyesuaikan warna tombol Riwayat Pemesanan */
         background-color: #48c78e;
@@ -36,6 +42,7 @@
         border-color: #3e8ed0;
         color: #fff;
         border-radius: 4px;
+        margin-top: auto; /* Mendorong tombol ke bagian bawah box */
     }
     .button.is-link.is-small.is-fullwidth:hover {
         background-color: #3273dc;
