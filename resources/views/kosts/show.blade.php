@@ -34,6 +34,14 @@
     .has-text-grey-dark { /* Menyesuaikan warna teks abu-abu gelap agar terlihat di tema gelap */
         color: #a0aec0 !important;
     }
+    /* Gaya tambahan untuk merapikan review */
+    .box.mb-3.has-text-left .title.is-5 { /* Menargetkan judul nama reviewer di dalam box review */
+        margin-bottom: 0.5rem !important; /* Menambah sedikit ruang di bawah nama reviewer */
+    }
+    .box.mb-3.has-text-left .subtitle.is-6.has-text-grey { /* Menargetkan komentar review */
+        word-wrap: break-word;
+        white-space: normal;
+    }
 </style>
 
 <section class="hero is-fullheight">
@@ -162,7 +170,7 @@
                             <p class="title is-5 mb-1" style="color: #e2e8f0;">{{ $review->nama_reviewer }}
                                 <span class="tag is-warning is-light ml-2">{{ $review->rating }}/5</span>
                             </p>
-                            <p class="subtitle is-6 has-text-grey" style="color: #a0aec0;">{{ $review->komentar }}</p>
+                            <p class="subtitle is-6 has-text-grey" style="color: #a0aec0; margin-top: 0.5rem;">{{ $review->komentar }}</p> {{-- Menambahkan margin-top ke komentar --}}
                         </div>
                     @empty
                         <div class="notification is-info is-light" style="border-radius: 4px;">
