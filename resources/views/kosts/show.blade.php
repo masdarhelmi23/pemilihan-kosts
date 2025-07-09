@@ -65,18 +65,20 @@
                                 <div class="card-image">
                                     <figure class="image is-4by3">
                                         @php
-                                            $photoUrl = asset('storage/' . $photo->path); // Default to storage path
+                                            $photoUrl = asset('storage/' . $photo->path); // Default ke jalur penyimpanan
+                                            $kostNameLower = strtolower($kost->nama_kost);
 
-                                            // Override with specific online URLs if kost name matches
-                                            if (strtolower($kost->nama_kost) === 'pratama') {
+                                            // Ganti dengan URL online spesifik jika nama kost cocok
+                                            if ($kostNameLower === 'pratama') {
                                                 $photoUrl = 'https://binabangunbangsa.com/wp-content/uploads/2020/03/tips-Manajemen-Rumah-Kost-yang-Baik-dan-Benar-.jpg';
-                                            } elseif (strtolower($kost->nama_kost) === 'babol') {
+                                            } elseif ($kostNameLower === 'babol') {
                                                 $photoUrl = 'https://office.mitrarenov.com/assets/main/images/news/93cf29661239b41f5cc393e112ef7a39.jpg';
-                                            } elseif (strtolower($kost->nama_kost) === 'griya mustika') {
+                                            } elseif ($kostNameLower === 'griya mustika') {
                                                 $photoUrl = 'https://papikost.com/images/property/478_968253603.jpg';
                                             }
                                         @endphp
                                         <img src="{{ $photoUrl }}" alt="Foto Kost" style="border-radius: 8px 8px 0 0;" onerror="this.onerror=null;this.src='https://via.placeholder.com/400x300?text=Image+Load+Error';"> {{-- Tambahkan border-radius ke gambar di card dan error fallback --}}
+                                        <script>console.log("Loading image for {{ $kost->nama_kost }}: {{ $photoUrl }}");</script> {{-- Debugging: log the image URL --}}
                                     </figure>
                                 </div>
                             </div>
