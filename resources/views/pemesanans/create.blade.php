@@ -8,10 +8,11 @@
         color: #e2e8f0; /* Warna teks default untuk kontras */
         min-height: 100vh; /* Memastikan body mengambil tinggi penuh viewport */
     }
-    .dark-page-wrapper {
-        background-color: #1a202c; /* Wrapper untuk memastikan latar belakang gelap penuh */
-        min-height: 100vh; /* Memastikan wrapper mengambil tinggi penuh viewport */
-        display: flex;
+    /* Menghapus .dark-page-wrapper dan menerapkan gayanya langsung ke section.hero */
+    .hero.is-fullheight {
+        background-color: #1a202c !important; /* Pastikan hero section juga gelap */
+        min-height: 100vh; /* Pastikan hero section mengambil tinggi penuh viewport */
+        display: flex; /* Menggunakan flexbox untuk centering */
         justify-content: center; /* Pusatkan konten secara horizontal */
         align-items: center; /* Pusatkan konten secara vertikal */
         padding: 1.5rem; /* Padding di sekitar box */
@@ -62,45 +63,43 @@
     }
 </style>
 
-<section class="section" style="padding: 0;"> {{-- Hapus padding di section karena wrapper akan mengaturnya --}}
-    {{-- Wrapper baru untuk memastikan latar belakang gelap dan konten terpusat --}}
-    <div class="dark-page-wrapper">
-        <div class="box"> {{-- Bulma 'box' component for the main container --}}
-            <h1 class="title is-3 has-text-primary mb-5" style="text-align: center;">Pesan Kost: {{ $kost->nama_kost }}</h1> {{-- Bulma title and color classes --}}
+{{-- Menggunakan section.hero sebagai kontainer utama dengan latar belakang gelap dan centering --}}
+<section class="hero is-fullheight">
+    <div class="box"> {{-- Bulma 'box' component for the main container --}}
+        <h1 class="title is-3 has-text-primary mb-5" style="text-align: center;">Pesan Kost: {{ $kost->nama_kost }}</h1> {{-- Bulma title and color classes --}}
 
-            <form action="{{ route('pemesanans.store', $kost->id) }}" method="POST">
-                @csrf
+        <form action="{{ route('pemesanans.store', $kost->id) }}" method="POST">
+            @csrf
 
-                <div class="field"> {{-- Bulma 'field' for form groups --}}
-                    <label class="label" for="nama_penyewa">Nama Penyewa</label> {{-- Bulma 'label' class --}}
-                    <div class="control"> {{-- Bulma 'control' for input wrapping --}}
-                        <input class="input" type="text" name="nama_penyewa" id="nama_penyewa" placeholder="Masukkan nama penyewa" required> {{-- Bulma 'input' class --}}
-                    </div>
+            <div class="field"> {{-- Bulma 'field' for form groups --}}
+                <label class="label" for="nama_penyewa">Nama Penyewa</label> {{-- Bulma 'label' class --}}
+                <div class="control"> {{-- Bulma 'control' for input wrapping --}}
+                    <input class="input" type="text" name="nama_penyewa" id="nama_penyewa" placeholder="Masukkan nama penyewa" required> {{-- Bulma 'input' class --}}
                 </div>
+            </div>
 
-                <div class="field">
-                    <label class="label" for="tanggal_mulai">Tanggal Mulai</label>
-                    <div class="control">
-                        <input class="input" type="date" name="tanggal_mulai" id="tanggal_mulai" required>
-                    </div>
+            <div class="field">
+                <label class="label" for="tanggal_mulai">Tanggal Mulai</label>
+                <div class="control">
+                    <input class="input" type="date" name="tanggal_mulai" id="tanggal_mulai" required>
                 </div>
+            </div>
 
-                <div class="field">
-                    <label class="label" for="tanggal_akhir">Tanggal Akhir</label>
-                    <div class="control">
-                        <input class="input" type="date" name="tanggal_akhir" id="tanggal_akhir" required>
-                    </div>
+            <div class="field">
+                <label class="label" for="tanggal_akhir">Tanggal Akhir</label>
+                <div class="control">
+                    <input class="input" type="date" name="tanggal_akhir" id="tanggal_akhir" required>
                 </div>
+            </div>
 
-                <div class="field is-grouped is-justify-content-center mt-5"> {{-- Menggunakan is-grouped untuk tombol dan is-justify-content-center untuk memusatkannya --}}
-                    <div class="control">
-                        <button type="submit" class="button is-primary is-medium"> {{-- Bulma 'button' classes --}}
-                            Simpan Pemesanan
-                        </button>
-                    </div>
+            <div class="field is-grouped is-justify-content-center mt-5"> {{-- Menggunakan is-grouped untuk tombol dan is-justify-content-center untuk memusatkannya --}}
+                <div class="control">
+                    <button type="submit" class="button is-primary is-medium"> {{-- Bulma 'button' classes --}}
+                        Simpan Pemesanan
+                    </button>
                 </div>
-            </form>
-        </div>
+            </div>
+        </form>
     </div>
 </section>
 @endsection
