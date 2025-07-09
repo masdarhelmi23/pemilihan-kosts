@@ -6,12 +6,23 @@
     html, body {
         background-color: #1a202c !important; /* Warna latar belakang sangat gelap untuk seluruh halaman */
         color: #e2e8f0; /* Warna teks default untuk kontras */
+        min-height: 100vh; /* Memastikan body mengambil tinggi penuh viewport */
+    }
+    .dark-page-wrapper {
+        background-color: #1a202c; /* Wrapper untuk memastikan latar belakang gelap penuh */
+        min-height: 100vh; /* Memastikan wrapper mengambil tinggi penuh viewport */
+        display: flex;
+        justify-content: center; /* Pusatkan konten secara horizontal */
+        align-items: center; /* Pusatkan konten secara vertikal */
+        padding: 1.5rem; /* Padding di sekitar box */
     }
     .box {
         background-color: #2d3748 !important; /* Latar belakang box menjadi gelap, pastikan dengan !important */
         color: #e2e8f0; /* Warna teks di dalam box */
         border-radius: 8px;
         padding: 2.5rem;
+        width: 100%; /* Memastikan box mengambil lebar penuh dari wrapper */
+        max-width: 768px; /* Batasi lebar maksimum box agar tidak terlalu lebar di desktop */
     }
     .title.has-text-primary { /* Menyesuaikan warna judul 'Pesan Kost' */
         color: #48c78e !important;
@@ -51,51 +62,52 @@
     }
 </style>
 
-<section class="section" style="min-height: 100vh; padding: 1.5rem;">
-    {{-- Menghapus div.container dan has-text-centered agar konten menjadi full width --}}
-    {{-- Menambahkan margin horizontal pada box agar tidak terlalu menempel ke tepi layar --}}
-    <div class="box" style="border-radius: 8px; padding: 2.5rem; margin-left: 1.5rem; margin-right: 1.5rem;">
-        <h1 class="title is-3 has-text-primary mb-5" style="color: #48c78e !important; text-align: center;">Pesan Kost: {{ $kost->nama_kost }}</h1> {{-- Menambahkan text-align center --}}
+<section class="section" style="padding: 0;"> {{-- Hapus padding di section karena wrapper akan mengaturnya --}}
+    {{-- Wrapper baru untuk memastikan latar belakang gelap dan konten terpusat --}}
+    <div class="dark-page-wrapper">
+        <div class="box">
+            <h1 class="title is-3 has-text-primary mb-5" style="color: #48c78e !important; text-align: center;">Pesan Kost: {{ $kost->nama_kost }}</h1>
 
-        {{-- Pesan Sukses Bulma --}}
-        @if(session('success'))
-            <div class="notification is-success is-light is-rounded mb-4" style="border-radius: 4px;">
-                <button class="delete"></button>
-                {{ session('success') }}
-            </div>
-        @endif
-
-        <form action="{{ route('pemesanans.store') }}" method="POST">
-            @csrf
-            <input type="hidden" name="kost_id" value="{{ $kost->id }}">
-
-            <div class="field">
-                <label class="label">Nama Penyewa</label>
-                <div class="control">
-                    <input class="input" type="text" name="nama_penyewa" placeholder="Masukkan nama Anda" required>
+            {{-- Pesan Sukses Bulma --}}
+            @if(session('success'))
+                <div class="notification is-success is-light is-rounded mb-4" style="border-radius: 4px;">
+                    <button class="delete"></button>
+                    {{ session('success') }}
                 </div>
-            </div>
+            @endif
 
-            <div class="field">
-                <label class="label">Tanggal Mulai</label>
-                <div class="control">
-                    <input class="input" type="date" name="tanggal_mulai" required>
-                </div>
-            </div>
+            <form action="{{ route('pemesanans.store') }}" method="POST">
+                @csrf
+                <input type="hidden" name="kost_id" value="{{ $kost->id }}">
 
-            <div class="field">
-                <label class="label">Tanggal Akhir</label>
-                <div class="control">
-                    <input class="input" type="date" name="tanggal_akhir" required>
+                <div class="field">
+                    <label class="label">Nama Penyewa</label>
+                    <div class="control">
+                        <input class="input" type="text" name="nama_penyewa" placeholder="Masukkan nama Anda" required>
+                    </div>
                 </div>
-            </div>
 
-            <div class="field is-grouped is-justify-content-center mt-5">
-                <div class="control">
-                    <button type="submit" class="button is-success is-medium">Simpan Pemesanan</button>
+                <div class="field">
+                    <label class="label">Tanggal Mulai</label>
+                    <div class="control">
+                        <input class="input" type="date" name="tanggal_mulai" required>
+                    </div>
                 </div>
-            </div>
-        </form>
+
+                <div class="field">
+                    <label class="label">Tanggal Akhir</label>
+                    <div class="control">
+                        <input class="input" type="date" name="tanggal_akhir" required>
+                    </div>
+                </div>
+
+                <div class="field is-grouped is-justify-content-center mt-5">
+                    <div class="control">
+                        <button type="submit" class="button is-success is-medium">Simpan Pemesanan</button>
+                    </div>
+                </div>
+            </form>
+        </div>
     </div>
 </section>
 @endsection
