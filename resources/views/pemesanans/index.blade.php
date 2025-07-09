@@ -8,7 +8,7 @@
         <div class="box has-background-dark has-text-white">
             {{-- Tombol Kembali ke Halaman Utama --}}
             <div class="mb-4">
-                <a href="{{ route('home') }}" class="button is-link is-light">
+                <a href="/" class="button is-link is-light">
                     ← Kembali ke Halaman Utama
                 </a>
             </div>
