@@ -26,11 +26,11 @@
                     <div class="box has-text-left"> {{-- Menggunakan Bulma 'box' untuk setiap kartu kost --}}
                         @if($kost->gambar)
                             <figure class="image is-4by3 mb-4"> {{-- Margin bawah untuk gambar --}}
-                                <img src="{{ asset('images/kosts/' . $kost->gambar) }}" alt="Foto {{ $kost->nama_kost }}"> {{-- Path gambar disesuaikan --}}
+                                <img src="{{ asset('storage/kosts/' . $kost->gambar) }}" alt="Foto {{ $kost->nama_kost }}"> {{-- Menghapus class is-rounded --}}
                             </figure>
                         @else
                             <figure class="image is-4by3 mb-4">
-                                <img src="https://via.placeholder.com/400x300?text=No+Image" alt="No Image Available"> {{-- Gambar default --}}
+                                <img src="https://via.placeholder.com/400x300?text=No+Image" alt="No Image Available"> {{-- Menghapus class is-rounded --}}
                             </figure>
                         @endif
 
