@@ -95,9 +95,10 @@
                         <img src="{{ $imageUrl }}" alt="Foto {{ $kost->nama_kost }}" onerror="this.onerror=null;this.src='https://via.placeholder.com/400x300?text=Image+Load+Error';" style="border-radius: 4px;"> {{-- Menambahkan onerror untuk fallback jika gambar gagal dimuat dan border-radius --}}
                     </figure>
 
-                    {{-- Menambahkan margin-top ke subtitle untuk memisahkannya dari judul kost --}}
-                    <h2 class="title is-5 mb-2">{{ $kost->nama_kost }}</h2> {{-- Judul kost --}}
-                    <p class="subtitle is-6 has-text-grey mt-2 mb-3">{{ $kost->alamat }}</p> {{-- Alamat kost --}}
+                    {{-- Mengubah mb-2 pada judul kost menjadi mb-3 untuk memberikan lebih banyak ruang di bawahnya --}}
+                    <h2 class="title is-5 mb-3">{{ $kost->nama_kost }}</h2> {{-- Judul kost --}}
+                    {{-- Mengubah mt-2 pada subtitle menjadi mt-3 untuk memberikan lebih banyak ruang di atasnya --}}
+                    <p class="subtitle is-6 has-text-grey mt-3 mb-3">{{ $kost->alamat }}</p> {{-- Alamat kost --}}
                     <p class="is-size-5 has-text-success has-text-weight-bold mb-3">Rp {{ number_format($kost->harga_per_bulan, 0, ',', '.') }}</p> {{-- Harga kost --}}
 
                     <a href="{{ route('kosts.show', $kost->id) }}" class="button is-link is-small is-fullwidth"> {{-- Tombol Lihat Detail --}}
