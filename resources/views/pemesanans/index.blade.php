@@ -7,102 +7,93 @@
         background-color: #1a202c !important; /* Warna latar belakang sangat gelap */
         color: #e2e8f0; /* Warna teks default untuk kontras */
     }
-    .table.is-striped tbody tr:nth-of-type(odd) {
-        background-color: #2d3748; /* Latar belakang baris ganjil */
+    .box {
+        background-color: #2d3748; /* Latar belakang box menjadi gelap */
+        color: #e2e8f0; /* Warna teks di dalam box */
+        border-radius: 8px;
+        padding: 2.5rem;
     }
-    .table.is-striped tbody tr:nth-of-type(even) {
-        background-color: #1a202c; /* Latar belakang baris genap */
+    .title.has-text-primary { /* Menyesuaikan warna judul 'Pesan Kost' */
+        color: #48c78e !important;
     }
-    .table.is-hoverable tbody tr:not(.is-selected):hover {
-        background-color: #4a5568 !important; /* Latar belakang saat hover */
+    .label { /* Warna label form */
+        color: #e2e8f0;
     }
-    .table.is-bordered td, .table.is-bordered th {
-        border-color: #4a5568; /* Warna border tabel */
+    .input, .textarea, .select select { /* Gaya input, textarea, dan select */
+        background-color: #1a202c; /* Latar belakang input menjadi gelap */
+        border-color: #4a5568; /* Warna border input */
+        color: #e2e8f0; /* Warna teks input */
+    }
+    .input::placeholder, .textarea::placeholder { /* Warna placeholder */
+        color: #a0aec0;
+    }
+    .input:focus, .textarea:focus, .select select:focus {
+        border-color: #3e8ed0; /* Warna border saat fokus */
+        box-shadow: 0 0 0 0.125em rgba(62, 142, 208, 0.25); /* Efek shadow saat fokus */
+    }
+    .button.is-success { /* Gaya tombol 'Simpan Pemesanan' */
+        background-color: #48c78e;
+        border-color: #48c78e;
+        color: #fff;
+        border-radius: 4px;
+    }
+    .button.is-success:hover {
+        background-color: #3eb578;
+        border-color: #3eb578;
+    }
+    .notification.is-success.is-light {
+        background-color: #2a613f; /* Warna notifikasi sukses yang lebih gelap */
+        color: #e2e8f0;
+    }
+    .notification.is-info.is-dark { /* Warna notifikasi info yang lebih gelap */
+        background-color: #2a4e61;
+        color: #e2e8f0;
     }
 </style>
 
-<section class="section" style="min-height: 100vh; padding: 1.5rem;"> {{-- Menambahkan padding ke section --}}
-    {{-- Memindahkan div.box keluar dari div.container agar menjadi full width --}}
-    <div class="box has-background-dark has-text-white" style="border-radius: 8px; padding: 2.5rem; margin-left: 1.5rem; margin-right: 1.5rem;"> {{-- Menambahkan margin horizontal agar tidak terlalu menempel ke tepi layar --}}
-        <h1 class="title is-3 has-text-primary mb-5" style="color: #48c78e !important;">Riwayat Pemesanan Kost</h1>
+<section class="section" style="min-height: 100vh; padding: 1.5rem;">
+    <div class="box has-background-dark has-text-white" style="border-radius: 8px; padding: 2.5rem; margin-left: 1.5rem; margin-right: 1.5rem;">
+        <h1 class="title is-3 has-text-primary mb-5" style="color: #48c78e !important;">Pesan Kost: {{ $kost->nama_kost }}</h1>
 
-        <div class="mb-5">
-            <a href="/" class="button is-link is-light" style="border-radius: 4px;">
-                ← Kembali ke Halaman Utama
-            </a>
-        </div>
-
+        {{-- Pesan Sukses Bulma --}}
         @if(session('success'))
-            <div class="notification is-success is-dark is-rounded mb-4" style="border-radius: 4px;">
+            <div class="notification is-success is-light is-rounded mb-4" style="border-radius: 4px;">
                 <button class="delete"></button>
                 {{ session('success') }}
             </div>
         @endif
 
-        @if($pemesanans->count())
-            <div class="table-container">
-                <table class="table is-fullwidth is-striped is-hoverable is-bordered" style="background-color: #2d3748; border-color: #4a5568;">
-                    <thead>
-                        <tr>
-                            <th class="has-background-dark has-text-white has-text-left" style="border-color: #4a5568;">Kost</th>
-                            <th class="has-background-dark has-text-white has-text-left" style="border-color: #4a5568;">Nama Penyewa</th>
-                            <th class="has-background-dark has-text-white has-text-centered" style="border-color: #4a5568;">Tanggal Mulai</th>
-                            <th class="has-background-dark has-text-white has-text-centered" style="border-color: #4a5568;">Tanggal Akhir</th>
-                            <th class="has-background-dark has-text-white has-text-centered" style="border-color: #4a5568;">Sisa Hari</th>
-                            <th class="has-background-dark has-text-white has-text-centered" style="border-color: #4a5568;">Status</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach($pemesanans as $pemesanan)
-                        <tr>
-                            <td class="has-text-white has-text-left" style="border-color: #4a5568;">{{ $pemesanan->kost->nama_kost }}</td>
-                            <td class="has-text-white has-text-left" style="border-color: #4a5568;">{{ $pemesanan->nama_penyewa }}</td>
-                            <td class="has-text-white has-text-centered" style="border-color: #4a5568;">{{ $pemesanan->tanggal_mulai }}</td>
-                            <td class="has-text-white has-text-centered" style="border-color: #4a5568;">{{ $pemesanan->tanggal_akhir }}</td>
-                            <td class="has-text-centered" style="border-color: #4a5568;">
-                                @php
-                                    $today = \Carbon\Carbon::today();
-                                    $end = \Carbon\Carbon::parse($pemesanan->tanggal_akhir);
-                                    $diff = $today->diffInDays($end, false);
-                                @endphp
-                                @if($diff > 0)
-                                    <span class="tag is-success is-light">{{ $diff }} hari lagi</span>
-                                @elseif($diff === 0)
-                                    <span class="tag is-warning is-light">Habis hari ini</span>
-                                @else
-                                    <span class="tag is-danger is-light">Sudah berakhir</span>
-                                @endif
-                            </td>
-                            <td class="has-text-centered" style="border-color: #4a5568;">
-                                @php
-                                    $statusClass = '';
-                                    switch($pemesanan->status ?? 'Pending') {
-                                        case 'Pending':
-                                            $statusClass = 'is-warning';
-                                            break;
-                                        case 'Confirmed':
-                                            $statusClass = 'is-success';
-                                            break;
-                                        case 'Cancelled':
-                                            $statusClass = 'is-danger';
-                                            break;
-                                        default:
-                                            $statusClass = 'is-info';
-                                            break;
-                                    }
-                                @endphp
-                                <span class="tag {{ $statusClass }} is-light">{{ $pemesanan->status ?? 'Pending' }}</span>
-                            </td>
-                        </tr>
-                        @endforeach
-                    </tbody>
-                </table>
+        <form action="{{ route('pemesanans.store') }}" method="POST">
+            @csrf
+            <input type="hidden" name="kost_id" value="{{ $kost->id }}">
+
+            <div class="field">
+                <label class="label">Nama Penyewa</label>
+                <div class="control">
+                    <input class="input" type="text" name="nama_penyewa" placeholder="Masukkan nama Anda" required>
+                </div>
             </div>
-        @else
-            <div class="notification is-info is-dark" style="border-radius: 4px;">
-                <p class="has-text-white">Tidak ada pemesanan yang ditemukan.</p>
+
+            <div class="field">
+                <label class="label">Tanggal Mulai</label>
+                <div class="control">
+                    <input class="input" type="date" name="tanggal_mulai" required>
+                </div>
             </div>
-        @endif
+
+            <div class="field">
+                <label class="label">Tanggal Akhir</label>
+                <div class="control">
+                    <input class="input" type="date" name="tanggal_akhir" required>
+                </div>
+            </div>
+
+            <div class="field is-grouped is-justify-content-center mt-5">
+                <div class="control">
+                    <button type="submit" class="button is-success is-medium">Simpan Pemesanan</button>
+                </div>
+            </div>
+        </form>
     </div>
 </section>
 @endsection
